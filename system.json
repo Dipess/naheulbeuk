@@ -2,7 +2,7 @@
   "name": "naheulbeuk",
   "title": "Naheulbeuk",
   "description": "The Naheulbeuk system for FoundryVTT!",
-  "version": "1.1.2.7",
+  "version": "1.1.2.8",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "9",
   "author": "Dipes",
@@ -549,6 +549,6 @@
   "secondaryTokenAttribute": "power",
   "url": "https://github.com/Dipess/naheulbeuk",
   "manifest": "https://github.com/Dipess/naheulbeuk/releases/latest/download/system.json",
-  "download": "https://github.com/Dipess/naheulbeuk/releases/download/1.1.2.7/system.zip",
+  "download": "https://github.com/Dipess/naheulbeuk/releases/download/1.1.2.8/system.zip",
   "license": "LICENSE.txt"
 }
