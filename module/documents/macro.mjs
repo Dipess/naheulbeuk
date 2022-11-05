@@ -1778,5 +1778,26 @@ export class Macros {
       })
     })
   }
+
+  static createMacro = async function(dropData, slot) {
+    const item = await fromUuid(dropData.uuid);
+    const actor = item.actor;
+    let command = null;
+    let macroName = null;
+    command = `game.naheulbeuk.rollItemMacro("${item.name}",1);//changer le dernier 1 en 0 pour arriver directement sur l'interface de jets de dés`;
+    macroName = item.name + " (" + game.actors.get(actor.id).name + ")";
+    let macro = game.macros.contents.find(m => (m.name === macroName) && (m.command === command));
+    if (!macro) {
+      macro = await Macro.create({
+          name: macroName,
+          type: "script",
+          img: item.img,
+          command: command,
+          flags: {"naheulbeuk.macro": true}
+      }, {displaySheet: false});
+      game.user.assignHotbarMacro(macro, slot);        
+    }
+  }
+
 }
 

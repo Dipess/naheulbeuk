@@ -55,25 +55,10 @@ Hooks.once('init', async function () {
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("naheulbeuk", NaheulbeukItemSheet, { makeDefault: true });
 
-  Hooks.on("hotbarDrop", async(bar, data, slot) => {
-    if (data.type == "Item"){
-      const item = await fromUuid(data.uuid);
-      const actor = item.actor;
-      let command = null;
-      let macroName = null;
-      command = `game.naheulbeuk.rollItemMacro("${item.name}",1);//changer le dernier 1 en 0 pour arriver directement sur l'interface de jets de dés`;
-      macroName = item.name + " (" + game.actors.get(actor.id).name + ")";
-      let macro = game.macros.contents.find(m => (m.name === macroName) && (m.command === command));
-      if (!macro) {
-        macro = await Macro.create({
-            name: macroName,
-            type: "script",
-            img: item.img,
-            command: command,
-            flags: {"naheulbeuk.macro": true}
-        }, {displaySheet: false});
-        game.user.assignHotbarMacro(macro, slot);
-      }
+  Hooks.on("hotbarDrop", (bar, data, slot) => {
+    if (["Item"].includes(data.type)) {
+      Macros.createMacro(data, slot);
+      return false;
     }
   })
 
